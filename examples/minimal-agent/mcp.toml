@@ -1,0 +1,15 @@
+# MCP servers are optional. Credentials stay in .env; this file names the
+# environment variables a server may receive.
+[mcp_servers]
+
+# [mcp_servers.remote]
+# url = "https://mcp.example.com/mcp"
+# bearer_token_env = "MCP_REMOTE_TOKEN"
+# required = true
+# enabled_tools = ["search", "read"]
+
+# [mcp_servers.local]
+# command = "example-mcp-server"
+# args = ["--stdio"]
+# env = { API_TOKEN = "MCP_LOCAL_TOKEN" }
+# required = false

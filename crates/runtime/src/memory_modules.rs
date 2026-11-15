@@ -1,0 +1,41 @@
+// Declarations only, for the in-memory backend modules. They live apart from lib.rs
+// because the charter's 100-line file budget cannot hold them there.
+mod memory;
+mod memory_address;
+mod memory_compaction;
+mod memory_delivery;
+mod memory_delivery_row;
+mod memory_finish;
+mod memory_history;
+mod memory_interaction;
+mod memory_io_store;
+mod memory_lease;
+mod memory_lanes;
+mod memory_media;
+mod memory_memories;
+mod memory_quota;
+mod memory_run;
+mod memory_schedule;
+mod memory_schedule_admit;
+mod memory_schedule_due;
+mod memory_schedule_manage;
+mod memory_schedule_release;
+mod memory_schedule_row;
+mod memory_schedule_settle;
+mod memory_schedule_time;
+mod memory_state;
+mod memory_state_bind;
+mod memory_state_claim;
+mod memory_state_delivery;
+mod memory_state_record;
+mod memory_steering;
+mod memory_steering_rows;
+mod memory_subagent_control;
+mod memory_subagent_message;
+mod memory_subagent_prompt;
+mod memory_subagent_spawn;
+mod memory_subagent_store;
+
+mod postgres_identity;
+mod prompt_scope;
+mod identity_boundary;

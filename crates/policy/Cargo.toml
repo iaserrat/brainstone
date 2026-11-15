@@ -1,0 +1,26 @@
+[package]
+name = "brainstone-policy"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+repository.workspace = true
+readme = "README.md"
+keywords = ["scheduling", "compaction", "steering"]
+categories = ["development-tools"]
+description = "Autonomy policy: schedules, compaction, steering, and delegation."
+
+[dependencies]
+agent = { path = "../agent", package = "brainstone-agent", version = "0.1.0" }
+jiff = { workspace = true }
+runtime = { path = "../runtime", package = "brainstone-runtime", version = "0.1.0" }
+surface = { path = "../surface", package = "brainstone-surface", version = "0.1.0" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["macros", "rt"] }
+
+[lints]
+workspace = true

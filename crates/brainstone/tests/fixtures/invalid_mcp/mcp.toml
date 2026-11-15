@@ -1,0 +1,3 @@
+[mcp_servers.remote]
+url = "https://mcp.example.test"
+bearer_token_env = "MCP_MISSING_TOKEN"

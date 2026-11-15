@@ -1,0 +1,27 @@
+# Build artifacts.
+/target
+
+# Environment files. .env.example is the tracked template; ignore every other
+# variant (.env, .env.local, .env.production, ...) so secrets never get staged.
+.env
+.env.*
+!.env.example
+
+# OS junk.
+.DS_Store
+Thumbs.db
+
+# Editors and agent-runtime local state.
+/.claude/
+/.idea/
+/.vscode/
+
+# Python test fixtures.
+__pycache__/
+*.pyc
+
+# Local SQLite state, including its WAL and shared-memory files.
+/data/
+
+# Profiling and coverage output.
+*.profraw

@@ -1,0 +1,12 @@
+# The charter's budgets, enforced rather than aspirational. Clippy's defaults
+# (100 lines, 7 arguments) are far looser than AGENTS.md and let every
+# function-level violation through silently.
+#
+# `too_many_lines` counts code lines, excluding comments and blank lines,
+# which is the charter's intent.
+too-many-lines-threshold = 25
+# The charter's limit is four PARAMETERS. Clippy counts the `self` receiver
+# as an argument, so a method with the maximum four parameters reports five.
+# Five here is the charter's four; a free function with five real parameters
+# is still caught, because it reports five too and must use a named input type.
+too-many-arguments-threshold = 5

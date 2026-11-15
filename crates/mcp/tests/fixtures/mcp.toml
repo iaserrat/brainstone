@@ -1,0 +1,18 @@
+[mcp_servers.github]
+url = "https://mcp.example.test"
+bearer_token_env = "MCP_GITHUB_TOKEN"
+env_headers = { "X-Child-Secret" = "MCP_CHILD_SECRET" }
+enabled_tools = ["search", "read"]
+
+[mcp_servers.local]
+command = "example-mcp"
+args = ["--stdio"]
+env = { "CHILD_SECRET" = "MCP_CHILD_SECRET" }
+cwd = "servers/local"
+required = false
+startup_timeout_seconds = 5
+tool_timeout_seconds = 30
+
+[mcp_servers.disabled]
+command = "not-started"
+enabled = false

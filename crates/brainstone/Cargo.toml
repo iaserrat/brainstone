@@ -1,0 +1,47 @@
+[package]
+name = "brainstone"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+repository.workspace = true
+readme = "README.md"
+keywords = ["agent", "llm", "durable", "ai", "async"]
+categories = ["development-tools"]
+description = "Durable AI agents in Rust: sessions, lanes, recovery, tools, and providers."
+
+[dependencies]
+telemetry = { path = "../telemetry", package = "brainstone-telemetry", version = "0.1.0" }
+agent = { path = "../agent", package = "brainstone-agent", version = "0.1.0" }
+anthropic = { path = "../anthropic", package = "brainstone-anthropic", version = "0.1.0" }
+host = { path = "../host", package = "brainstone-host", version = "0.1.0" }
+mcp = { path = "../mcp", package = "brainstone-mcp", version = "0.1.0" }
+memory = { path = "../memory", package = "brainstone-memory", version = "0.1.0" }
+openai = { path = "../openai", package = "brainstone-openai", version = "0.1.0" }
+policy = { path = "../policy", package = "brainstone-policy", version = "0.1.0" }
+media = { path = "../media", package = "brainstone-media", version = "0.1.0" }
+runtime = { path = "../runtime", package = "brainstone-runtime", version = "0.1.0" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+# Endpoint validation and typed HTTP headers reuse the provider transport dependency.
+reqwest = { workspace = true }
+# Stable replay identities must distinguish endpoint URLs without storing their secrets.
+# Rejected: std hashes, whose algorithm is not stable across releases.
+sha2 = { workspace = true }
+sigv4 = { path = "../sigv4", package = "brainstone-sigv4", version = "0.1.0" }
+rustls = { workspace = true }
+toml = { workspace = true }
+skills = { path = "../skills", package = "brainstone-skills", version = "0.1.0" }
+subagents = { path = "../subagents", package = "brainstone-subagents", version = "0.1.0" }
+surface = { path = "../surface", package = "brainstone-surface", version = "0.1.0" }
+tokio = { workspace = true, features = ["macros", "rt-multi-thread", "signal", "sync"] }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+tokio = { workspace = true, features = ["io-util", "net"] }
+
+[lints]
+workspace = true

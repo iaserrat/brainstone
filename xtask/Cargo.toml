@@ -1,0 +1,13 @@
+[package]
+name = "xtask"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish = false
+license.workspace = true
+description = "Workspace tasks: the gate, the audit, and the opt-in PostgreSQL suite."
+
+[dependencies]
+
+[lints]
+workspace = true
