@@ -1,0 +1,86 @@
+[advisories]
+# This is the only advisory policy in the workspace: `cargo deny check` covers
+# vulnerabilities, unmaintained crates, and yanked versions from this file, so
+# the gate does not run a second tool whose ignore list could drift from it.
+yanked = "deny"
+ignore = [
+    # sqlx-sqlite 0.9.0 requires libsqlite3-sys <0.38.0, so the patched 0.39.0
+    # is unreachable until sqlx ships it. Exploiting this needs an
+    # attacker-written database file plus a -wal whose page size differs;
+    # docs/operations.md records that limit. Remove when sqlx allows 0.39.
+    { id = "RUSTSEC-2026-0459", reason = "sqlx 0.9 pins libsqlite3-sys below the patched release" },
+    # Macro-only, and the AWS SDK selects it; nothing in this workspace can.
+    { id = "RUSTSEC-2026-0441", reason = "pin-utils is a macro dependency of aws-smithy-http" },
+    # Remove when rmcp no longer requires chrono. See docs/operations.md.
+    { id = "RUSTSEC-2026-0543", reason = "rmcp requires chrono; this advisory reports maintenance status" },
+]
+
+[licenses]
+allow = [
+    "Apache-2.0",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "MIT",
+    "Unicode-3.0",
+    "Zlib",
+]
+confidence-threshold = 0.8
+unused-allowed-license = "allow"
+# Mozilla's root-certificate dataset is data, not executable code. reqwest's
+# rustls verifier embeds this exact crate for portable HTTPS trust roots; keep
+# the data license scoped to that crate rather than allowing it globally.
+exceptions = [
+    # jsonschema's URI parser uses this helper; scope its license to the exact crate.
+    { crate = "borrow-or-share@0.2.4", allow = ["MIT-0"] },
+    { crate = "webpki-root-certs@1.0.11", allow = ["CDLA-Permissive-2.0"] },
+]
+
+[bans]
+multiple-versions = "deny"
+wildcards = "deny"
+# Grows only with a written reason per entry, as real dependency trees land.
+skip = [
+    # The reference OTel SDK 0.33 still uses rand 0.9/getrandom 0.3, while
+    # SQLx and tungstenite use rand 0.10/getrandom 0.4. These are SDK-private;
+    # replacing secure trace-ID generation to deduplicate them is not justified.
+    { crate = "rand@0.9.5", reason = "OpenTelemetry SDK and runtime clients use adjacent rand generations" },
+    { crate = "rand_core@0.9.5", reason = "OpenTelemetry SDK rand 0.9 internals" },
+    { crate = "getrandom@0.3.4", reason = "OpenTelemetry SDK rand 0.9 internals" },
+    { crate = "r-efi@5.3.0", reason = "getrandom 0.3 and 0.4 target-specific EFI bindings" },
+    # reqwest 0.13's URL/TLS graph is mid-transition: ICU, wasm, and Android
+    # derive crates still require syn 2 while serde and tokio use syn 3. Both
+    # are build-time-only and this exact skip becomes unmatched once upstream
+    # converges, so cargo-deny will tell us to remove it.
+    { crate = "syn@2.0.119", reason = "transitive proc-macro ecosystem transition in reqwest 0.13" },
+    # SQLx 0.9's migration checksum still uses sha2 0.10 while its Postgres
+    # authentication stack has moved to the RustCrypto 0.11 family. Both
+    # versions are internal to one direct dependency and disappear together
+    # when SQLx finishes that transition.
+    { crate = "block-buffer@0.10.4", reason = "SQLx 0.9 migration and Postgres crypto transition" },
+    { crate = "cpufeatures@0.2.17", reason = "SQLx 0.9 migration and Postgres crypto transition" },
+    { crate = "crypto-common@0.1.6", reason = "SQLx 0.9 migration and Postgres crypto transition" },
+    { crate = "digest@0.10.7", reason = "SQLx 0.9 migration and Postgres crypto transition" },
+    { crate = "sha2@0.10.9", reason = "SQLx 0.9 migration and Postgres crypto transition" },
+    # Postgres authentication uses rand 0.10/getrandom 0.4; rustls ring still
+    # uses getrandom 0.2. Neither is selected directly by this workspace.
+    { crate = "getrandom@0.2.17", reason = "ring and SQLx Postgres require different random generations" },
+    # SQLx core intentionally combines hashlink and indexmap, whose current
+    # releases use adjacent hashbrown versions.
+    { crate = "hashbrown@0.16.1", reason = "SQLx 0.9 hashlink and indexmap internals" },
+    # ring retains the old Windows API crate while Tokio, native certificates,
+    # and SQLx use the current one; this has no duplicate code on Unix builds.
+    { crate = "windows-sys@0.52.0", reason = "ring and current runtime dependencies differ on Windows API generation" },
+    # The workspace and the official MCP SDK use base64 0.23 while Reqwest and
+    # SQLx remain on 0.22, which they select transitively.
+    { crate = "base64@0.23.1", reason = "workspace and rmcp use base64 0.23; reqwest and SQLx remain on 0.22" },
+    # png 0.18 decompresses with miniz_oxide 0.8 directly, while flate2 1.1.10
+    # (also under png) moved to 0.9. Both are private to the image decoder.
+    { crate = "miniz_oxide@0.8.9", reason = "png 0.18 and flate2 1.1.10 use adjacent miniz_oxide releases" },
+]
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]
+allow-git = []

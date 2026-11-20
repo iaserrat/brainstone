@@ -1,0 +1,68 @@
+[
+  {
+    "framework": "brainstone",
+    "case": "structured-exact",
+    "passed": true,
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": false,
+        "event": "accepted",
+        "operation_id": 1
+      },
+      {
+        "event": "terminal",
+        "operation_id": 1,
+        "status": "completed",
+        "value": "\n\n{\"value\": \"indigo\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.6447758750000503,
+    "requests": 1
+  },
+  {
+    "framework": "brainstone",
+    "case": "structured-nested",
+    "passed": true,
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": false,
+        "event": "accepted",
+        "operation_id": 1
+      },
+      {
+        "event": "terminal",
+        "operation_id": 1,
+        "status": "completed",
+        "value": "\n\n{\"person\":{\"age\":31,\"name\":\"Zoë\"}}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.5625179999915417,
+    "requests": 1
+  },
+  {
+    "framework": "brainstone",
+    "case": "structured-enum",
+    "passed": true,
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": false,
+        "event": "accepted",
+        "operation_id": 1
+      },
+      {
+        "event": "terminal",
+        "operation_id": 1,
+        "status": "completed",
+        "value": "\n\n{\"count\": 3, \"status\": \"approved\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.699244584000553,
+    "requests": 1
+  }
+]

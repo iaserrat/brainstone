@@ -1,0 +1,646 @@
+[
+  {
+    "framework": "brainstone",
+    "case": "after_accept",
+    "passed": true,
+    "ledger": {
+      "effects": 1,
+      "attempts": 1,
+      "values": [
+        "durable-☕"
+      ]
+    },
+    "crashed": {
+      "exit_code": 73,
+      "events": [
+        {
+          "duplicate": false,
+          "event": "accepted",
+          "operation_id": 1
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.6173387089947937,
+      "requests": 0
+    },
+    "recovered": {
+      "exit_code": 0,
+      "events": [
+        {
+          "event": "terminal",
+          "operation_id": 1,
+          "status": "completed",
+          "value": "{\"value\": \"durable-☕\"}"
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.19253612498869188,
+      "requests": 2
+    }
+  },
+  {
+    "framework": "brainstone",
+    "case": "after_effect",
+    "passed": true,
+    "ledger": {
+      "effects": 1,
+      "attempts": 2,
+      "values": [
+        "durable-☕"
+      ]
+    },
+    "crashed": {
+      "exit_code": 73,
+      "events": [
+        {
+          "duplicate": false,
+          "event": "accepted",
+          "operation_id": 1
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.1104804999922635,
+      "requests": 1
+    },
+    "recovered": {
+      "exit_code": 0,
+      "events": [
+        {
+          "event": "terminal",
+          "operation_id": 1,
+          "status": "completed",
+          "value": "{\"value\": \"durable-☕\"}"
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.0926908330002334,
+      "requests": 1
+    }
+  },
+  {
+    "framework": "brainstone",
+    "case": "after_tool_result",
+    "passed": true,
+    "ledger": {
+      "effects": 1,
+      "attempts": 1,
+      "values": [
+        "durable-☕"
+      ]
+    },
+    "crashed": {
+      "exit_code": 73,
+      "events": [
+        {
+          "duplicate": false,
+          "event": "accepted",
+          "operation_id": 1
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.0946481249993667,
+      "requests": 1
+    },
+    "recovered": {
+      "exit_code": 0,
+      "events": [
+        {
+          "event": "terminal",
+          "operation_id": 1,
+          "status": "completed",
+          "value": "{\"value\": \"durable-☕\"}"
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.10119966699858196,
+      "requests": 1
+    }
+  },
+  {
+    "framework": "brainstone",
+    "case": "terminal_read",
+    "passed": true,
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "terminal",
+        "operation_id": 1,
+        "status": "completed",
+        "value": "{\"value\": \"durable-☕\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.07151116599561647,
+    "requests": 0
+  },
+  {
+    "framework": "brainstone",
+    "case": "same_input_retry",
+    "passed": true,
+    "contract": "native request-id deduplication",
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": true,
+        "event": "accepted",
+        "operation_id": 1
+      },
+      {
+        "event": "terminal",
+        "operation_id": 1,
+        "status": "completed",
+        "value": "{\"value\": \"durable-☕\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.03865708300145343,
+    "requests": 0
+  },
+  {
+    "framework": "brainstone",
+    "case": "changed_input_retry",
+    "passed": false,
+    "contract": "native conflicting retry rejection",
+    "exit_code": 1,
+    "events": [
+      {
+        "code": "eval_driver_failed",
+        "event": "driver_error",
+        "message": "request id reused with new input"
+      }
+    ],
+    "stderr": "Error: Runtime(IdempotencyConflict)\n",
+    "seconds": 0.028657917006057687,
+    "requests": 0
+  },
+  {
+    "framework": "agent-rs",
+    "case": "after_accept",
+    "passed": true,
+    "ledger": {
+      "effects": 1,
+      "attempts": 1,
+      "values": [
+        "durable-☕"
+      ]
+    },
+    "crashed": {
+      "exit_code": 73,
+      "events": [
+        {
+          "event": "accepted",
+          "operation_id": "0c1b1dd8-bece-4df1-9a67-90f411ee6f2e"
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.5329442910006037,
+      "requests": 0
+    },
+    "recovered": {
+      "exit_code": 0,
+      "events": [
+        {
+          "event": "terminal",
+          "operation_id": "0c1b1dd8-bece-4df1-9a67-90f411ee6f2e",
+          "status": "completed",
+          "value": "durable-☕"
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.17979433300206438,
+      "requests": 2
+    }
+  },
+  {
+    "framework": "agent-rs",
+    "case": "after_effect",
+    "passed": true,
+    "ledger": {
+      "effects": 1,
+      "attempts": 2,
+      "values": [
+        "durable-☕"
+      ]
+    },
+    "crashed": {
+      "exit_code": 73,
+      "events": [
+        {
+          "event": "accepted",
+          "operation_id": "7df95761-092b-4af8-aaa7-8c497839dd4a"
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.07851645800110418,
+      "requests": 1
+    },
+    "recovered": {
+      "exit_code": 0,
+      "events": [
+        {
+          "event": "terminal",
+          "operation_id": "7df95761-092b-4af8-aaa7-8c497839dd4a",
+          "status": "completed",
+          "value": "durable-☕"
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.12423299999500159,
+      "requests": 1
+    }
+  },
+  {
+    "framework": "agent-rs",
+    "case": "after_tool_result",
+    "passed": true,
+    "ledger": {
+      "effects": 1,
+      "attempts": 1,
+      "values": [
+        "durable-☕"
+      ]
+    },
+    "crashed": {
+      "exit_code": 73,
+      "events": [
+        {
+          "event": "accepted",
+          "operation_id": "5a7956bf-ae08-47ec-8ab5-cb5c6b14c38a"
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.12401300000783522,
+      "requests": 1
+    },
+    "recovered": {
+      "exit_code": 0,
+      "events": [
+        {
+          "event": "terminal",
+          "operation_id": "5a7956bf-ae08-47ec-8ab5-cb5c6b14c38a",
+          "status": "completed",
+          "value": "durable-☕"
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.11322254200058524,
+      "requests": 1
+    }
+  },
+  {
+    "framework": "agent-rs",
+    "case": "terminal_read",
+    "passed": true,
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "terminal",
+        "operation_id": "5a7956bf-ae08-47ec-8ab5-cb5c6b14c38a",
+        "status": "completed",
+        "value": "durable-☕"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.018110709002939984,
+    "requests": 0
+  },
+  {
+    "framework": "agent-rs",
+    "case": "same_input_retry",
+    "passed": true,
+    "contract": "native request-id deduplication",
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "5a7956bf-ae08-47ec-8ab5-cb5c6b14c38a"
+      },
+      {
+        "event": "terminal",
+        "operation_id": "5a7956bf-ae08-47ec-8ab5-cb5c6b14c38a",
+        "status": "completed",
+        "value": "durable-☕"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.015215708001051098,
+    "requests": 0
+  },
+  {
+    "framework": "agent-rs",
+    "case": "changed_input_retry",
+    "passed": true,
+    "contract": "native conflicting retry rejection",
+    "exit_code": 0,
+    "events": [
+      {
+        "code": "idempotency_conflict",
+        "event": "driver_error"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.02283016699948348,
+    "requests": 0
+  },
+  {
+    "framework": "langgraph",
+    "case": "after_accept",
+    "passed": true,
+    "ledger": {
+      "effects": 1,
+      "attempts": 1,
+      "values": [
+        "durable-☕"
+      ]
+    },
+    "crashed": {
+      "exit_code": 73,
+      "events": [
+        {
+          "event": "accepted",
+          "operation_id": "after_accept",
+          "boundary": "input_checkpoint"
+        }
+      ],
+      "stderr": "",
+      "seconds": 1.3276793749973876,
+      "requests": 0
+    },
+    "recovered": {
+      "exit_code": 0,
+      "events": [
+        {
+          "event": "terminal",
+          "status": "completed",
+          "operation_id": "after_accept",
+          "value": "{\"value\": \"durable-☕\"}"
+        }
+      ],
+      "stderr": "",
+      "seconds": 1.100800625004922,
+      "requests": 2
+    }
+  },
+  {
+    "framework": "langgraph",
+    "case": "after_effect",
+    "passed": true,
+    "ledger": {
+      "effects": 1,
+      "attempts": 2,
+      "values": [
+        "durable-☕"
+      ]
+    },
+    "crashed": {
+      "exit_code": 73,
+      "events": [
+        {
+          "event": "accepted",
+          "operation_id": "after_effect",
+          "boundary": "input_checkpoint"
+        }
+      ],
+      "stderr": "",
+      "seconds": 1.1826826670003356,
+      "requests": 1
+    },
+    "recovered": {
+      "exit_code": 0,
+      "events": [
+        {
+          "event": "terminal",
+          "status": "completed",
+          "operation_id": "after_effect",
+          "value": "{\"value\": \"durable-☕\"}"
+        }
+      ],
+      "stderr": "",
+      "seconds": 1.106198334004148,
+      "requests": 1
+    }
+  },
+  {
+    "framework": "langgraph",
+    "case": "after_tool_result",
+    "passed": true,
+    "ledger": {
+      "effects": 1,
+      "attempts": 1,
+      "values": [
+        "durable-☕"
+      ]
+    },
+    "crashed": {
+      "exit_code": 73,
+      "events": [
+        {
+          "event": "accepted",
+          "operation_id": "after_tool_result",
+          "boundary": "input_checkpoint"
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.8158986660127994,
+      "requests": 1
+    },
+    "recovered": {
+      "exit_code": 0,
+      "events": [
+        {
+          "event": "terminal",
+          "status": "completed",
+          "operation_id": "after_tool_result",
+          "value": "{\"value\": \"durable-☕\"}"
+        }
+      ],
+      "stderr": "",
+      "seconds": 1.2871240410022438,
+      "requests": 1
+    }
+  },
+  {
+    "framework": "langgraph",
+    "case": "terminal_read",
+    "passed": true,
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "terminal",
+        "status": "completed",
+        "operation_id": "after_tool_result",
+        "value": "{\"value\": \"durable-☕\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.5248033750103787,
+    "requests": 0
+  },
+  {
+    "framework": "langgraph",
+    "case": "same_input_retry",
+    "passed": false,
+    "contract": "native request-id deduplication",
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "after_tool_result",
+        "boundary": "input_checkpoint"
+      },
+      {
+        "event": "terminal",
+        "status": "completed",
+        "operation_id": "after_tool_result",
+        "value": "{\"value\": \"ok\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.4651062079938129,
+    "requests": 1
+  },
+  {
+    "framework": "langgraph",
+    "case": "changed_input_retry",
+    "passed": false,
+    "contract": "native conflicting retry rejection",
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "after_tool_result",
+        "boundary": "input_checkpoint"
+      },
+      {
+        "event": "terminal",
+        "status": "completed",
+        "operation_id": "after_tool_result",
+        "value": "{\"value\": \"ok\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.2808932909974828,
+    "requests": 1
+  },
+  {
+    "framework": "brainstone",
+    "case": "concurrent_resume",
+    "passed": true,
+    "contract": "one application effect under concurrent drivers",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1,
+      "values": [
+        "durable-☕"
+      ]
+    },
+    "requests": 2,
+    "drivers": [
+      {
+        "exit_code": 0,
+        "stdout": "{\"event\":\"terminal\",\"operation_id\":1,\"status\":\"completed\",\"value\":\"{\\\"value\\\": \\\"durable-☕\\\"}\"}\n",
+        "stderr": ""
+      },
+      {
+        "exit_code": 0,
+        "stdout": "{\"event\":\"terminal\",\"operation_id\":1,\"status\":\"completed\",\"value\":\"{\\\"value\\\": \\\"durable-☕\\\"}\"}\n",
+        "stderr": ""
+      }
+    ],
+    "inspection": {
+      "exit_code": 0,
+      "events": [
+        {
+          "event": "terminal",
+          "operation_id": 1,
+          "status": "completed",
+          "value": "{\"value\": \"durable-☕\"}"
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.010182334008277394,
+      "requests": 0
+    }
+  },
+  {
+    "framework": "agent-rs",
+    "case": "concurrent_resume",
+    "passed": true,
+    "contract": "one application effect under concurrent drivers",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1,
+      "values": [
+        "durable-☕"
+      ]
+    },
+    "requests": 2,
+    "drivers": [
+      {
+        "exit_code": 0,
+        "stdout": "{\"event\":\"terminal\",\"operation_id\":\"42789ec3-b71e-42c8-aff4-0e1eed28880f\",\"status\":\"completed\",\"value\":\"durable-☕\"}\n",
+        "stderr": ""
+      },
+      {
+        "exit_code": 1,
+        "stdout": "{\"code\":\"store_busy\",\"event\":\"driver_error\"}\n",
+        "stderr": ""
+      }
+    ],
+    "inspection": {
+      "exit_code": 0,
+      "events": [
+        {
+          "event": "terminal",
+          "operation_id": "42789ec3-b71e-42c8-aff4-0e1eed28880f",
+          "status": "completed",
+          "value": "durable-☕"
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.00893625000026077,
+      "requests": 0
+    }
+  },
+  {
+    "framework": "langgraph",
+    "case": "concurrent_resume",
+    "passed": false,
+    "contract": "one application effect under concurrent drivers",
+    "ledger": {
+      "effects": 2,
+      "attempts": 2,
+      "values": [
+        "durable-☕",
+        "durable-☕"
+      ]
+    },
+    "requests": 4,
+    "drivers": [
+      {
+        "exit_code": 0,
+        "stdout": "{\"event\": \"terminal\", \"status\": \"completed\", \"operation_id\": \"concurrent\", \"value\": \"{\\\"value\\\": \\\"durable-☕\\\"}\"}\n",
+        "stderr": ""
+      },
+      {
+        "exit_code": 0,
+        "stdout": "{\"event\": \"terminal\", \"status\": \"completed\", \"operation_id\": \"concurrent\", \"value\": \"{\\\"value\\\": \\\"durable-☕\\\"}\"}\n",
+        "stderr": ""
+      }
+    ],
+    "inspection": {
+      "exit_code": 0,
+      "events": [
+        {
+          "event": "terminal",
+          "status": "completed",
+          "operation_id": "concurrent",
+          "value": "{\"value\": \"durable-☕\"}"
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.4059944590117084,
+      "requests": 0
+    }
+  }
+]

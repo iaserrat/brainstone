@@ -1,0 +1,298 @@
+[
+  {
+    "repeat": 0,
+    "requested": true,
+    "typed_wire": false,
+    "schema": false,
+    "called_tool": true,
+    "message": {
+      "role": "assistant",
+      "content": "\n\n",
+      "refusal": null,
+      "reasoning": null,
+      "tool_calls": [
+        {
+          "type": "function",
+          "index": 0,
+          "id": "call_abfd7c0aca984b499a5a30c7d0666f6c",
+          "function": {
+            "name": "RecordValue",
+            "arguments": "{\"value\": \"durable-☕\"}"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "repeat": 0,
+    "requested": true,
+    "typed_wire": false,
+    "schema": true,
+    "called_tool": false,
+    "message": {
+      "role": "assistant",
+      "content": "\n\n\n\n{ \"value\": \"durable-☕\" }",
+      "refusal": null,
+      "reasoning": null
+    }
+  },
+  {
+    "repeat": 0,
+    "requested": true,
+    "typed_wire": true,
+    "schema": false,
+    "called_tool": true,
+    "message": {
+      "role": "assistant",
+      "content": "\n\n",
+      "refusal": null,
+      "reasoning": null,
+      "tool_calls": [
+        {
+          "type": "function",
+          "index": 0,
+          "id": "call_e27306ea919e4c3da6c45e50b2fb76dd",
+          "function": {
+            "name": "RecordValue",
+            "arguments": "{\"value\": \"durable-☕\"}"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "repeat": 0,
+    "requested": true,
+    "typed_wire": true,
+    "schema": true,
+    "called_tool": false,
+    "message": {
+      "role": "assistant",
+      "content": "\n\n\n\n{ \"value\": \"durable-☕\" }",
+      "refusal": null,
+      "reasoning": null
+    }
+  },
+  {
+    "repeat": 0,
+    "requested": false,
+    "typed_wire": false,
+    "schema": false,
+    "called_tool": true,
+    "message": {
+      "role": "assistant",
+      "content": "\n\n",
+      "refusal": null,
+      "reasoning": null,
+      "tool_calls": [
+        {
+          "type": "function",
+          "index": 0,
+          "id": "call_69cab5e7bac3457683870c428aac903e",
+          "function": {
+            "name": "RecordValue",
+            "arguments": "{\"value\": \"indigo\"}"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "repeat": 0,
+    "requested": false,
+    "typed_wire": false,
+    "schema": true,
+    "called_tool": false,
+    "message": {
+      "role": "assistant",
+      "content": "\n\n{\"value\": \"indigo\"}",
+      "refusal": null,
+      "reasoning": null
+    }
+  },
+  {
+    "repeat": 0,
+    "requested": false,
+    "typed_wire": true,
+    "schema": false,
+    "called_tool": true,
+    "message": {
+      "role": "assistant",
+      "content": "\n\n",
+      "refusal": null,
+      "reasoning": null,
+      "tool_calls": [
+        {
+          "type": "function",
+          "index": 0,
+          "id": "call_4cb9fc4a7d3c4b5eb782e5665e1e4c51",
+          "function": {
+            "name": "RecordValue",
+            "arguments": "{\"value\": \"indigo\"}"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "repeat": 0,
+    "requested": false,
+    "typed_wire": true,
+    "schema": true,
+    "called_tool": false,
+    "message": {
+      "role": "assistant",
+      "content": "\n\n{\"value\":\"indigo\"}",
+      "refusal": null,
+      "reasoning": null
+    }
+  },
+  {
+    "repeat": 1,
+    "requested": true,
+    "typed_wire": false,
+    "schema": false,
+    "called_tool": true,
+    "message": {
+      "role": "assistant",
+      "content": "\n\n",
+      "refusal": null,
+      "reasoning": null,
+      "tool_calls": [
+        {
+          "type": "function",
+          "index": 0,
+          "id": "call_dfcf444d12de405cb22b15fee0be7d51",
+          "function": {
+            "name": "RecordValue",
+            "arguments": "{\"value\": \"durable-☕\"}"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "repeat": 1,
+    "requested": true,
+    "typed_wire": false,
+    "schema": true,
+    "called_tool": false,
+    "message": {
+      "role": "assistant",
+      "content": "\n\n\n\n{ \"value\": \"durable-☕\" }",
+      "refusal": null,
+      "reasoning": null
+    }
+  },
+  {
+    "repeat": 1,
+    "requested": true,
+    "typed_wire": true,
+    "schema": false,
+    "called_tool": true,
+    "message": {
+      "role": "assistant",
+      "content": "\n\n",
+      "refusal": null,
+      "reasoning": null,
+      "tool_calls": [
+        {
+          "type": "function",
+          "index": 0,
+          "id": "call_0f58a34be56f4bc8998f76f734270bd3",
+          "function": {
+            "name": "RecordValue",
+            "arguments": "{\"value\": \"durable-☕\"}"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "repeat": 1,
+    "requested": true,
+    "typed_wire": true,
+    "schema": true,
+    "called_tool": false,
+    "message": {
+      "role": "assistant",
+      "content": "\n\n\n\n{ \"value\": \"durable-☕\" }",
+      "refusal": null,
+      "reasoning": null
+    }
+  },
+  {
+    "repeat": 1,
+    "requested": false,
+    "typed_wire": false,
+    "schema": false,
+    "called_tool": true,
+    "message": {
+      "role": "assistant",
+      "content": "\n\n",
+      "refusal": null,
+      "reasoning": null,
+      "tool_calls": [
+        {
+          "type": "function",
+          "index": 0,
+          "id": "call_6c86b6c217fe4cc18cc72c35cdd61e80",
+          "function": {
+            "name": "RecordValue",
+            "arguments": "{\"value\": \"indigo\"}"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "repeat": 1,
+    "requested": false,
+    "typed_wire": false,
+    "schema": true,
+    "called_tool": false,
+    "message": {
+      "role": "assistant",
+      "content": "\n\n{\"value\":\"indigo\"}",
+      "refusal": null,
+      "reasoning": null
+    }
+  },
+  {
+    "repeat": 1,
+    "requested": false,
+    "typed_wire": true,
+    "schema": false,
+    "called_tool": true,
+    "message": {
+      "role": "assistant",
+      "content": "\n\n",
+      "refusal": null,
+      "reasoning": null,
+      "tool_calls": [
+        {
+          "type": "function",
+          "index": 0,
+          "id": "call_a6f4f6fe22144ddba10090f2a2aa0b10",
+          "function": {
+            "name": "RecordValue",
+            "arguments": "{\"value\": \"indigo\"}"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "repeat": 1,
+    "requested": false,
+    "typed_wire": true,
+    "schema": true,
+    "called_tool": false,
+    "message": {
+      "role": "assistant",
+      "content": "\n\n{\"value\":\"indigo\"}",
+      "refusal": null,
+      "reasoning": null
+    }
+  }
+]

@@ -1,0 +1,41 @@
+[package]
+name = "brainstone-mcp"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+repository.workspace = true
+readme = "README.md"
+keywords = ["mcp", "json-rpc", "tools", "stdio"]
+categories = ["api-bindings", "network-programming"]
+description = "MCP tool servers over stdio and Streamable HTTP."
+
+[dependencies]
+telemetry = { path = "../telemetry", package = "brainstone-telemetry", version = "0.1.0" }
+agent = { path = "../agent", package = "brainstone-agent", version = "0.1.0" }
+base64 = { workspace = true }
+media = { path = "../media", package = "brainstone-media", version = "0.1.0" }
+rmcp = { workspace = true }
+reqwest = { workspace = true }
+serde_json = { workspace = true }
+# Approval binding must change when an executor or its credentials change.
+# Rejected: unstable std hashing; reuse the workspace's existing SHA-256 crate.
+sha2 = { workspace = true }
+futures-util = { workspace = true }
+serde = { workspace = true }
+tokio = { workspace = true, features = ["process", "sync", "time"] }
+toml = { workspace = true }
+tracing = { workspace = true }
+
+[dev-dependencies]
+tempfile.workspace = true
+opentelemetry.workspace = true
+opentelemetry_sdk = { workspace = true, features = ["testing"] }
+tracing-opentelemetry.workspace = true
+tracing-subscriber = { workspace = true }
+rmcp = { workspace = true, features = ["server"] }
+tokio = { workspace = true, features = ["io-util", "macros", "net", "rt", "test-util"] }
+
+[lints]
+workspace = true

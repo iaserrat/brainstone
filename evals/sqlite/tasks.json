@@ -1,0 +1,7 @@
+[
+  {"name":"exact_fact","text":"Return exactly a JSON object with value set to the string indigo.","expected":"indigo"},
+  {"name":"arithmetic","text":"A basket has 17 apples, receives 8, then loses 6. Return the number left as a string in a JSON object with the key value.","expected":"19"},
+  {"name":"unicode","text":"Return the exact string Zoë ☕ 東京 in a JSON object with the key value. Preserve every character.","expected":"Zoë ☕ 東京"},
+  {"name":"tool_use","text":"Call RecordValue exactly once with value durable-☕. Then return the recorded value in a JSON object with the key value.","expected":"durable-☕","effects":1},
+  {"name":"tool_unicode","text":"Call RecordValue exactly once with value mañana-東京. Then return the recorded value in a JSON object with the key value.","expected":"mañana-東京","effects":1}
+]

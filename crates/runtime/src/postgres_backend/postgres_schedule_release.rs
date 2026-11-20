@@ -1,0 +1,88 @@
+use crate::postgres_backend::{postgres_lanes, postgres_schedule_promote};
+use sqlx::PgConnection;
+
+use crate::postgres_backend::postgres_schedule_promote::Due;
+use crate::{Error, LaneId};
+
+pub(crate) async fn one(connection: &mut PgConnection) -> Result<(), Error> {
+    let Some(row) = due(connection).await? else {
+        return Ok(());
+    };
+    postgres_lanes::lock(connection, LaneId(row.1)).await?;
+    let legacy = (row.5, row.6.as_deref(), row.7.as_deref());
+    let repeat = crate::stored_recurrence::decode(row.8.as_ref(), legacy)?;
+    let (operation, delivers) =
+        postgres_schedule_promote::insert(connection, &row, repeat.is_some()).await?;
+    postgres_schedule_promote::register_delivery(connection, operation, delivers).await?;
+    match repeat {
+        Some(recurrence) => {
+            let next_run_at = recurrence.next_run_at(database_now_ms(connection).await?, row.9)?;
+            advance(connection, row.0, operation, next_run_at).await
+        }
+        None => mark_released(connection, row.0, operation).await,
+    }
+}
+
+/// Due-ness is judged by database time, so the next run is computed from it
+/// too: it lands strictly after the run just released, whatever a worker's
+/// clock says, and `schedule/<id>/<run_at>` request ids never collide.
+async fn database_now_ms(connection: &mut PgConnection) -> Result<i64, Error> {
+    sqlx::query_scalar("SELECT (EXTRACT(EPOCH FROM clock_timestamp()) * 1000)::BIGINT")
+        .fetch_one(connection)
+        .await
+        .map_err(Error::store)
+}
+
+/// A standing schedule whose previous run has not ended is not due: runs never
+/// overlap, and its failure streak counts whole runs.
+async fn due(connection: &mut PgConnection) -> Result<Option<Due>, Error> {
+    sqlx::query_as(
+        "SELECT w.id, w.lane_id, w.prompt, w.delivery_target, w.run_at_unix_ms, \
+         w.repeat_minute, w.repeat_time_zone, w.repeat_days, w.recurrence, \
+         (EXTRACT(EPOCH FROM w.created_at) * 1000)::BIGINT, w.destination FROM scheduled_work w \
+         WHERE w.state = 'pending' AND w.run_at_unix_ms <= \
+         (EXTRACT(EPOCH FROM clock_timestamp()) * 1000)::BIGINT \
+         AND NOT EXISTS (SELECT 1 FROM operations o WHERE o.id = w.released_operation_id \
+         AND o.state IN ('accepted', 'running')) \
+         AND (w.destination IS NOT NULL \
+         OR (SELECT l.follow_enabled FROM lanes l WHERE l.id = w.lane_id)) \
+         ORDER BY w.run_at_unix_ms, w.id FOR UPDATE OF w SKIP LOCKED LIMIT 1",
+    )
+    .fetch_optional(connection)
+    .await
+    .map_err(Error::store)
+}
+
+async fn advance(
+    connection: &mut PgConnection,
+    id: i64,
+    operation: i64,
+    next_run_at: i64,
+) -> Result<(), Error> {
+    sqlx::query(
+        "UPDATE scheduled_work SET run_at_unix_ms = $3, released_operation_id = $2 WHERE id = $1",
+    )
+    .bind(id)
+    .bind(operation)
+    .bind(next_run_at)
+    .execute(connection)
+    .await
+    .map_err(Error::store)?;
+    Ok(())
+}
+
+async fn mark_released(
+    connection: &mut PgConnection,
+    id: i64,
+    operation: i64,
+) -> Result<(), Error> {
+    sqlx::query(
+        "UPDATE scheduled_work SET state = 'released', released_operation_id = $2 WHERE id = $1",
+    )
+    .bind(id)
+    .bind(operation)
+    .execute(connection)
+    .await
+    .map_err(Error::store)?;
+    Ok(())
+}

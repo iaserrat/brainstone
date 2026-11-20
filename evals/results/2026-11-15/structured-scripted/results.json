@@ -1,0 +1,47 @@
+[
+  {
+    "framework": "brainstone",
+    "case": "structured-valid",
+    "passed": true,
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": false,
+        "event": "accepted",
+        "operation_id": 1
+      },
+      {
+        "event": "terminal",
+        "operation_id": 1,
+        "status": "completed",
+        "value": "{\"value\": \"ok\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.8415875409991713,
+    "requests": 1
+  },
+  {
+    "framework": "brainstone",
+    "case": "structured-invalid",
+    "passed": true,
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": false,
+        "event": "accepted",
+        "operation_id": 1
+      },
+      {
+        "code": "structured_output_invalid",
+        "event": "terminal",
+        "message": "final output does not satisfy its JSON schema",
+        "operation_id": 1,
+        "status": "failed"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.09001962500042282,
+    "requests": 1
+  }
+]

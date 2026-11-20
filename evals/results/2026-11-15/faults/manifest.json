@@ -1,0 +1,16 @@
+{
+  "adapter_sha256": {
+    "target/debug/examples/eval_sqlite": "6ac0215541d3d8151868f8d59386e8a2b5aae3b55a68a4760b9b2cc8a8dd34ac",
+    "evals/sqlite/agent-rs/target/debug/brainstone-agent-rs-eval": "769cc47eb6c84c7bf0bb34b79d8a9c85c26062642a85d258457acc9993901f84",
+    "evals/sqlite/langgraph_agent.py": "162baa11ada3e31823fcc89b17bd6e193696c1d9f1fc51c0ed3932ba652d1f15"
+  },
+  "working_tree_dirty": true,
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "provider": null,
+  "live": false,
+  "repetitions": 2,
+  "system": "Follow the user task. Use tools only when requested. Return a JSON object with exactly one key, \"value\", whose value is a string.",
+  "gateway": "buffered upstream JSON converted to SSE; no streaming benchmark",
+  "output_tokens": 768,
+  "budget_usd": "0.50"
+}

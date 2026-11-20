@@ -1,0 +1,141 @@
+[workspace]
+members = ["crates/*", "xtask"]
+# Virtual manifests default to resolver 1 regardless of member editions.
+resolver = "3"
+
+[workspace.package]
+# Every crate is published under a brainstone- prefix; the keys dependencies use
+# stay short (see the `package =` renames below), so source paths are unchanged.
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.100.0"
+publish = true
+license = "MIT"
+repository = "https://github.com/iaserrat/brainstone"
+
+[workspace.dependencies]
+# Typed tools derive the same input schema their Rust arguments deserialize.
+# Rejected: handwritten schemas, which duplicate field types and validation rules.
+# Already resolved by the MCP SDK; reuse its schema implementation.
+schemars = "1.2.3"
+# Structured-output contracts require full JSON Schema compilation and validation.
+# Rejected: std/serde parsing, which cannot validate schema semantics; a hand-written
+# keyword subset would silently accept unsupported constraints. Disable external I/O.
+jsonschema = { version = "0.61.2", default-features = false }
+# Tool arguments and schemas are JSON by every provider's contract, and the
+# event stream is JSON by this workspace's contract. serde_json is the
+# ecosystem's single implementation. Rejected: hand-rolled JSON.
+serde_json = "1.0.145"
+# Surface interaction receipts require UUID v4. The MCP SDK already resolves
+# this crate; rejected: custom UUID formatting in backend-specific SQL.
+uuid = { version = "1.28.0", features = ["v4"] }
+# Derives the event stream and model-response codecs. Rejected: hand-written
+# impls, which is hundreds of lines across the type catalog for no gain.
+serde = { version = "1.0.229", features = ["derive"] }
+# Provider image inputs and durable JSON events require standard base64. Rust's
+# standard library has no codec; rejected: a handwritten security-sensitive codec.
+base64 = "0.23.1"
+# The provider boundary needs HTTP, TLS, timeouts, and JSON. reqwest supplies
+# those together and already owns safe retry behavior for replayable requests.
+# Rejected: a hand-rolled hyper client, which would expose transport plumbing.
+# "form" for provider endpoints that reject JSON bodies with invalid_arguments.
+reqwest = { version = "0.13.4", default-features = false, features = ["form", "json", "rustls", "stream"] }
+# User-supplied MIME metadata is untrusted. A narrowly featured decoder validates actual
+# raster format and bounded dimensions; rejected: magic-byte-only checks, which
+# accept corrupt images and cannot bound decompression bombs.
+image = { version = "0.25.9", default-features = false, features = ["jpeg", "png", "webp"] }
+# A reply names a tool-returned image by a digest of its bytes so a surface
+# can attach exactly that image after a crash or deploy. The digest must be
+# stable across releases and resist a tool crafting a colliding image.
+# Rejected: std's DefaultHasher (algorithm unspecified across releases) and a
+# hand-rolled FNV (no collision resistance). sha2 0.11 is already in the
+# lockfile through aws-sigv4, so this compiles nothing new.
+sha2 = { version = "0.11.0", default-features = false }
+# The agent core remains runtime-agnostic; provider retry timers and tests use
+# tokio. Rejected: a second executor beside the workspace's production runtime.
+tokio = { version = "1.49", default-features = false }
+# Both durable backends need Tokio-native pools, transactions, and embedded
+# migrations; PostgreSQL also needs TLS. SQLx already supplies both dialects.
+# Rejected: a second database driver and separate migration dependency.
+sqlx = { version = "0.9.0", default-features = false, features = ["json", "migrate", "postgres", "sqlite", "runtime-tokio", "tls-rustls-ring-native-roots"] }
+# WebSocket streams implement the standard Sink and Stream traits.
+# `futures-util` supplies their async extension methods. Rejected: manual poll.
+futures-util = { version = "0.3.31", default-features = false, features = ["sink", "std"] }
+# The executable links both Reqwest's AWS-LC client and SQLx's Ring client.
+# Rustls requires the process to choose one default for WebSocket TLS.
+rustls = { version = "0.23.43", default-features = false, features = ["ring", "std"] }
+# Bedrock IAM access is SigV4 over the same Messages wire protocol. aws-config
+# resolves the standard credential chain (env, profile, SSO, web identity,
+# container and instance roles); aws-sigv4 is AWS's reference signer.
+# Rejected: reqsign (fewer credential sources) and a hand-written signer,
+# which is security-sensitive code AWS already maintains.
+aws-config = { version = "1.11.0", features = ["behavior-version-latest"] }
+aws-credential-types = "1.3.0"
+aws-sigv4 = { version = "1.5.1", default-features = false, features = ["sign-http"] }
+# Classic Bedrock (`InvokeModelWithResponseStream`) is AWS's own API: the
+# official SDK owns signing, bearer tokens, endpoint resolution, retries, and
+# event-stream frame decoding. Rejected: reimplementing that framing by hand.
+aws-sdk-bedrockruntime = { version = "1.141.0", default-features = false, features = ["behavior-version-latest", "default-https-client", "rt-tokio"] }
+# Tests encode event-stream frames with AWS's codec to feed the SDK client.
+aws-smithy-eventstream = "0.61.2"
+# The SDK config API names auth schemes with this crate's identifiers.
+aws-smithy-runtime-api = "1.15.0"
+aws-smithy-types = "1.6.2"
+# The service composition root needs structured container logs. These are the
+# Tokio ecosystem's standard facade and formatter. Rejected: ad-hoc println
+# output, which has no levels, fields, or RUST_LOG filtering.
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.22", features = ["env-filter", "fmt", "json"] }
+# Local renderers require private named paths and cleanup on every return path.
+# The standard library has no secure RAII temporary directory abstraction.
+tempfile = "3.27.0"
+# MCP is a versioned wire protocol with negotiation, transports, MRTR, tasks,
+# and evolving schemas. The protocol project's official SDK supplies those
+# semantics. Rejected: maintaining a second JSON-RPC implementation here.
+rmcp = { version = "3.5.1", default-features = false, features = ["client", "elicitation", "transport-child-process", "transport-streamable-http-client-reqwest"] }
+# MCP server topology is operator-owned TOML. The serde-backed parser gives
+# strict syntax and line-aware failures. Rejected: a bespoke config grammar.
+toml = "1.1.8"
+# Anthropic-compatible agent definitions are Markdown with YAML frontmatter.
+# serde-saphyr is a maintained, safe typed deserializer. Rejected: the
+# deprecated serde-yaml forks and a partial hand-written YAML parser.
+serde-saphyr = "2.0.0"
+# Scheduling accepts absolute RFC 3339 instants. Jiff provides strict parsing
+# and integer timestamps without coupling the store to a database time type.
+# Rejected: a partial hand-written date parser and ambiguous local datetimes.
+jiff = { version = "0.2.35", default-features = false, features = ["std"] }
+
+# Portable telemetry uses the reference SDK and OTLP codecs rather than a
+# vendor client or handwritten exporter. Rejected: direct Datadog protocols,
+# which couple the platform to one backend and duplicate batching/aggregation.
+opentelemetry = { version = "0.33.1", default-features = false, features = ["trace", "metrics"] }
+opentelemetry_sdk = { version = "0.33.1", default-features = false, features = ["trace", "metrics", "internal-logs"] }
+opentelemetry-otlp = { version = "0.33.1", default-features = false, features = ["http-proto", "reqwest-blocking-client", "reqwest-rustls", "trace", "metrics"] }
+# Integration tests decode actual OTLP protobuf requests with upstream codecs.
+# Rejected: treating HTTP 200 or raw byte substring matching as interoperability.
+opentelemetry-proto = { version = "0.33.1", default-features = false, features = ["gen-tonic-messages", "trace", "metrics"] }
+prost = "0.14.4"
+# The maintained tracing bridge preserves async parentage and W3C context.
+# Rejected: a second custom tracing-to-OpenTelemetry adapter.
+tracing-opentelemetry = { version = "0.34.0", default-features = false }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+rust_2018_idioms = { level = "deny", priority = -1 }
+unreachable_pub = "deny"
+unused_qualifications = "deny"
+missing_debug_implementations = "deny"
+let_underscore_drop = "deny"
+trivial_casts = "deny"
+trivial_numeric_casts = "deny"
+unused_lifetimes = "deny"
+
+[workspace.lints.clippy]
+all = { level = "deny", priority = -1 }
+pedantic = { level = "deny", priority = -1 }
+# Manifest hygiene for published crates. Duplicate-version reporting stays here
+# off: deny.toml decides that with a written reason per exception. Nursery is
+# not enabled: it is explicitly unstable, and its redundant_pub_crate lint asks
+# for the `pub` that unreachable_pub forbids.
+cargo = { level = "deny", priority = -1 }
+multiple_crate_versions = "allow"

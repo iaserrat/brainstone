@@ -1,0 +1,37 @@
+//! Memory persistence implementation. Shared record codecs remain at the crate root.
+
+pub(crate) mod memory;
+pub(crate) mod memory_address;
+pub(crate) mod memory_compaction;
+pub(crate) mod memory_delivery;
+pub(crate) mod memory_delivery_row;
+pub(crate) mod memory_finish;
+pub(crate) mod memory_history;
+pub(crate) mod memory_interaction;
+pub(crate) mod memory_io_store;
+pub(crate) mod memory_lanes;
+pub(crate) mod memory_lease;
+pub(crate) mod memory_media;
+pub(crate) mod memory_memories;
+pub(crate) mod memory_quota;
+pub(crate) mod memory_run;
+pub(crate) mod memory_schedule;
+pub(crate) mod memory_schedule_admit;
+pub(crate) mod memory_schedule_due;
+pub(crate) mod memory_schedule_manage;
+pub(crate) mod memory_schedule_release;
+pub(crate) mod memory_schedule_row;
+pub(crate) mod memory_schedule_settle;
+pub(crate) mod memory_schedule_time;
+pub(crate) mod memory_state;
+pub(crate) mod memory_state_bind;
+pub(crate) mod memory_state_claim;
+pub(crate) mod memory_state_delivery;
+pub(crate) mod memory_state_record;
+pub(crate) mod memory_steering;
+pub(crate) mod memory_steering_rows;
+pub(crate) mod memory_subagent_control;
+pub(crate) mod memory_subagent_message;
+pub(crate) mod memory_subagent_prompt;
+pub(crate) mod memory_subagent_spawn;
+pub(crate) mod memory_subagent_store;

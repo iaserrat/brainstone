@@ -1,0 +1,27 @@
+[package]
+name = "brainstone-surface"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+repository.workspace = true
+readme = "README.md"
+keywords = ["surfaces", "threads", "attachments"]
+categories = ["api-bindings"]
+description = "The surface seam: thread input, attachments, and destinations."
+
+[dependencies]
+agent = { path = "../agent", package = "brainstone-agent", version = "0.1.0" }
+futures-util = { workspace = true }
+media = { path = "../media", package = "brainstone-media", version = "0.1.0" }
+runtime = { path = "../runtime", package = "brainstone-runtime", version = "0.1.0" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+[dev-dependencies]
+image = { workspace = true }
+tokio = { workspace = true, features = ["macros", "rt"] }
+
+[lints]
+workspace = true

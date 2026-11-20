@@ -1,0 +1,29 @@
+[package]
+name = "brainstone-openai"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+repository.workspace = true
+readme = "README.md"
+keywords = ["openai", "llm", "responses", "chat"]
+categories = ["api-bindings"]
+description = "OpenAI Responses and Chat Completions model adapters."
+
+[dependencies]
+telemetry = { path = "../telemetry", package = "brainstone-telemetry", version = "0.1.0" }
+agent = { path = "../agent", package = "brainstone-agent", version = "0.1.0" }
+reqwest = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+sigv4 = { path = "../sigv4", package = "brainstone-sigv4", version = "0.1.0" }
+tokio = { workspace = true, features = ["time"] }
+
+[dev-dependencies]
+aws-credential-types = { workspace = true, features = ["test-util"] }
+serde_json = { workspace = true }
+tokio = { workspace = true, features = ["io-util", "macros", "net", "rt"] }
+
+[lints]
+workspace = true

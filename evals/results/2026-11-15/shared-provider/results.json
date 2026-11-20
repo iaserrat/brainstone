@@ -1,0 +1,1110 @@
+[
+  {
+    "framework": "brainstone",
+    "case": "exact_fact-0",
+    "passed": false,
+    "answer_correct": true,
+    "effect_contract": false,
+    "value": "indigo",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": false,
+        "event": "accepted",
+        "operation_id": 1
+      },
+      {
+        "event": "terminal",
+        "operation_id": 1,
+        "status": "completed",
+        "value": "{\"value\":\"indigo\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 2.4853002919990104,
+    "requests": 2
+  },
+  {
+    "framework": "agent-rs",
+    "case": "exact_fact-0",
+    "passed": true,
+    "answer_correct": true,
+    "effect_contract": true,
+    "value": "indigo",
+    "ledger": {
+      "effects": 0,
+      "attempts": 0
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "86734f32-a05a-4c2f-a0c3-f8bb2e0478a4"
+      },
+      {
+        "event": "terminal",
+        "operation_id": "86734f32-a05a-4c2f-a0c3-f8bb2e0478a4",
+        "status": "completed",
+        "value": "indigo"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.795592584006954,
+    "requests": 1
+  },
+  {
+    "framework": "langgraph",
+    "case": "exact_fact-0",
+    "passed": false,
+    "answer_correct": true,
+    "effect_contract": false,
+    "value": "indigo",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "exact_fact-0",
+        "boundary": "input_checkpoint"
+      },
+      {
+        "event": "terminal",
+        "status": "completed",
+        "operation_id": "exact_fact-0",
+        "value": "{\"value\": \"indigo\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.8632319169992115,
+    "requests": 2
+  },
+  {
+    "framework": "brainstone",
+    "case": "arithmetic-0",
+    "passed": false,
+    "answer_correct": true,
+    "effect_contract": false,
+    "value": "19",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": false,
+        "event": "accepted",
+        "operation_id": 1
+      },
+      {
+        "event": "terminal",
+        "operation_id": 1,
+        "status": "completed",
+        "value": "{\"value\": \"19\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.068921041995054,
+    "requests": 2
+  },
+  {
+    "framework": "agent-rs",
+    "case": "arithmetic-0",
+    "passed": true,
+    "answer_correct": true,
+    "effect_contract": true,
+    "value": "19",
+    "ledger": {
+      "effects": 0,
+      "attempts": 0
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "e7c645d4-d3ff-4180-a20f-fe7dd0809a13"
+      },
+      {
+        "event": "terminal",
+        "operation_id": "e7c645d4-d3ff-4180-a20f-fe7dd0809a13",
+        "status": "completed",
+        "value": "19"
+      }
+    ],
+    "stderr": "",
+    "seconds": 2.7633009999990463,
+    "requests": 1
+  },
+  {
+    "framework": "langgraph",
+    "case": "arithmetic-0",
+    "passed": false,
+    "answer_correct": true,
+    "effect_contract": false,
+    "value": "19",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "arithmetic-0",
+        "boundary": "input_checkpoint"
+      },
+      {
+        "event": "terminal",
+        "status": "completed",
+        "operation_id": "arithmetic-0",
+        "value": "{\"value\": \"19\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 4.849546125013148,
+    "requests": 2
+  },
+  {
+    "framework": "brainstone",
+    "case": "unicode-0",
+    "passed": false,
+    "answer_correct": true,
+    "effect_contract": false,
+    "value": "Zoë ☕ 東京",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": false,
+        "event": "accepted",
+        "operation_id": 1
+      },
+      {
+        "event": "terminal",
+        "operation_id": 1,
+        "status": "completed",
+        "value": "{\"value\":\"Zoë ☕ 東京\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.3187287920009112,
+    "requests": 2
+  },
+  {
+    "framework": "agent-rs",
+    "case": "unicode-0",
+    "passed": true,
+    "answer_correct": true,
+    "effect_contract": true,
+    "value": "Zoë ☕ 東京",
+    "ledger": {
+      "effects": 0,
+      "attempts": 0
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "eab4c057-950f-4f74-b853-c82cbbcccb1d"
+      },
+      {
+        "event": "terminal",
+        "operation_id": "eab4c057-950f-4f74-b853-c82cbbcccb1d",
+        "status": "completed",
+        "value": "Zoë ☕ 東京"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.1483032919932157,
+    "requests": 1
+  },
+  {
+    "framework": "langgraph",
+    "case": "unicode-0",
+    "passed": false,
+    "answer_correct": true,
+    "effect_contract": false,
+    "value": "Zoë ☕ 東京",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "unicode-0",
+        "boundary": "input_checkpoint"
+      },
+      {
+        "event": "terminal",
+        "status": "completed",
+        "operation_id": "unicode-0",
+        "value": "{\"value\": \"Zoë ☕ 東京\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.8894095419964287,
+    "requests": 2
+  },
+  {
+    "framework": "brainstone",
+    "case": "tool_use-0",
+    "passed": true,
+    "answer_correct": true,
+    "effect_contract": true,
+    "value": "durable-☕",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": false,
+        "event": "accepted",
+        "operation_id": 1
+      },
+      {
+        "event": "terminal",
+        "operation_id": 1,
+        "status": "completed",
+        "value": "{\"value\":\"durable-☕\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.0553426669939654,
+    "requests": 2
+  },
+  {
+    "framework": "agent-rs",
+    "case": "tool_use-0",
+    "passed": false,
+    "answer_correct": true,
+    "effect_contract": false,
+    "value": "durable-☕",
+    "ledger": {
+      "effects": 0,
+      "attempts": 0
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "074e71f4-cfc2-4058-a846-c4a68a60b941"
+      },
+      {
+        "event": "terminal",
+        "operation_id": "074e71f4-cfc2-4058-a846-c4a68a60b941",
+        "status": "completed",
+        "value": "durable-☕"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.556780290993629,
+    "requests": 1
+  },
+  {
+    "framework": "langgraph",
+    "case": "tool_use-0",
+    "passed": true,
+    "answer_correct": true,
+    "effect_contract": true,
+    "value": "durable-☕",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "tool_use-0",
+        "boundary": "input_checkpoint"
+      },
+      {
+        "event": "terminal",
+        "status": "completed",
+        "operation_id": "tool_use-0",
+        "value": "{\"value\": \"durable-☕\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.677266458995291,
+    "requests": 2
+  },
+  {
+    "framework": "brainstone",
+    "case": "tool_unicode-0",
+    "passed": true,
+    "answer_correct": true,
+    "effect_contract": true,
+    "value": "mañana-東京",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": false,
+        "event": "accepted",
+        "operation_id": 1
+      },
+      {
+        "event": "terminal",
+        "operation_id": 1,
+        "status": "completed",
+        "value": "{\"value\":\"mañana-東京\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.1198926659999415,
+    "requests": 2
+  },
+  {
+    "framework": "agent-rs",
+    "case": "tool_unicode-0",
+    "passed": false,
+    "answer_correct": true,
+    "effect_contract": false,
+    "value": "mañana-東京",
+    "ledger": {
+      "effects": 0,
+      "attempts": 0
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "140560ae-6945-4db6-9c07-217ff8e49e1e"
+      },
+      {
+        "event": "terminal",
+        "operation_id": "140560ae-6945-4db6-9c07-217ff8e49e1e",
+        "status": "completed",
+        "value": "mañana-東京"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.8920626250037458,
+    "requests": 1
+  },
+  {
+    "framework": "langgraph",
+    "case": "tool_unicode-0",
+    "passed": true,
+    "answer_correct": true,
+    "effect_contract": true,
+    "value": "mañana-東京",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "tool_unicode-0",
+        "boundary": "input_checkpoint"
+      },
+      {
+        "event": "terminal",
+        "status": "completed",
+        "operation_id": "tool_unicode-0",
+        "value": "{\"value\": \"mañana-東京\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.5529993340023793,
+    "requests": 2
+  },
+  {
+    "framework": "agent-rs",
+    "case": "exact_fact-1",
+    "passed": true,
+    "answer_correct": true,
+    "effect_contract": true,
+    "value": "indigo",
+    "ledger": {
+      "effects": 0,
+      "attempts": 0
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "9c4505ed-971b-4092-bd25-2b98b211fa3a"
+      },
+      {
+        "event": "terminal",
+        "operation_id": "9c4505ed-971b-4092-bd25-2b98b211fa3a",
+        "status": "completed",
+        "value": "indigo"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.878464207999059,
+    "requests": 1
+  },
+  {
+    "framework": "langgraph",
+    "case": "exact_fact-1",
+    "passed": false,
+    "answer_correct": true,
+    "effect_contract": false,
+    "value": "indigo",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "exact_fact-1",
+        "boundary": "input_checkpoint"
+      },
+      {
+        "event": "terminal",
+        "status": "completed",
+        "operation_id": "exact_fact-1",
+        "value": "{\"value\": \"indigo\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.780251332995249,
+    "requests": 2
+  },
+  {
+    "framework": "brainstone",
+    "case": "exact_fact-1",
+    "passed": false,
+    "answer_correct": true,
+    "effect_contract": false,
+    "value": "indigo",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": false,
+        "event": "accepted",
+        "operation_id": 1
+      },
+      {
+        "event": "terminal",
+        "operation_id": 1,
+        "status": "completed",
+        "value": "{\"value\":\"indigo\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.3155587500077672,
+    "requests": 2
+  },
+  {
+    "framework": "agent-rs",
+    "case": "arithmetic-1",
+    "passed": true,
+    "answer_correct": true,
+    "effect_contract": true,
+    "value": "19",
+    "ledger": {
+      "effects": 0,
+      "attempts": 0
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "fda3203e-6595-4957-bbb4-878cf136e033"
+      },
+      {
+        "event": "terminal",
+        "operation_id": "fda3203e-6595-4957-bbb4-878cf136e033",
+        "status": "completed",
+        "value": "19"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.46291329100495204,
+    "requests": 1
+  },
+  {
+    "framework": "langgraph",
+    "case": "arithmetic-1",
+    "passed": false,
+    "answer_correct": true,
+    "effect_contract": false,
+    "value": "19",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "arithmetic-1",
+        "boundary": "input_checkpoint"
+      },
+      {
+        "event": "terminal",
+        "status": "completed",
+        "operation_id": "arithmetic-1",
+        "value": "{\"value\": \"19\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.7876776670018444,
+    "requests": 2
+  },
+  {
+    "framework": "brainstone",
+    "case": "arithmetic-1",
+    "passed": false,
+    "answer_correct": true,
+    "effect_contract": false,
+    "value": "19",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": false,
+        "event": "accepted",
+        "operation_id": 1
+      },
+      {
+        "event": "terminal",
+        "operation_id": 1,
+        "status": "completed",
+        "value": "{\"value\":\"19\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.9259063330100616,
+    "requests": 2
+  },
+  {
+    "framework": "agent-rs",
+    "case": "unicode-1",
+    "passed": true,
+    "answer_correct": true,
+    "effect_contract": true,
+    "value": "Zoë ☕ 東京",
+    "ledger": {
+      "effects": 0,
+      "attempts": 0
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "1738f4fb-82f2-400c-be5a-f44d809f5f9c"
+      },
+      {
+        "event": "terminal",
+        "operation_id": "1738f4fb-82f2-400c-be5a-f44d809f5f9c",
+        "status": "completed",
+        "value": "Zoë ☕ 東京"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.4170602080121171,
+    "requests": 1
+  },
+  {
+    "framework": "langgraph",
+    "case": "unicode-1",
+    "passed": false,
+    "answer_correct": true,
+    "effect_contract": false,
+    "value": "Zoë ☕ 東京",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "unicode-1",
+        "boundary": "input_checkpoint"
+      },
+      {
+        "event": "terminal",
+        "status": "completed",
+        "operation_id": "unicode-1",
+        "value": "{\"value\":\"Zoë ☕ 東京\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 2.791527166002197,
+    "requests": 2
+  },
+  {
+    "framework": "brainstone",
+    "case": "unicode-1",
+    "passed": false,
+    "answer_correct": true,
+    "effect_contract": false,
+    "value": "Zoë ☕ 東京",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": false,
+        "event": "accepted",
+        "operation_id": 1
+      },
+      {
+        "event": "terminal",
+        "operation_id": 1,
+        "status": "completed",
+        "value": "{\"value\":\"Zoë ☕ 東京\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.396158916002605,
+    "requests": 2
+  },
+  {
+    "framework": "agent-rs",
+    "case": "tool_use-1",
+    "passed": false,
+    "answer_correct": true,
+    "effect_contract": false,
+    "value": "durable-☕",
+    "ledger": {
+      "effects": 0,
+      "attempts": 0
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "a57db76f-eb47-4ed0-a30e-ccf4bad5d662"
+      },
+      {
+        "event": "terminal",
+        "operation_id": "a57db76f-eb47-4ed0-a30e-ccf4bad5d662",
+        "status": "completed",
+        "value": "durable-☕"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.3256519999995362,
+    "requests": 1
+  },
+  {
+    "framework": "langgraph",
+    "case": "tool_use-1",
+    "passed": true,
+    "answer_correct": true,
+    "effect_contract": true,
+    "value": "durable-☕",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "tool_use-1",
+        "boundary": "input_checkpoint"
+      },
+      {
+        "event": "terminal",
+        "status": "completed",
+        "operation_id": "tool_use-1",
+        "value": "{\"value\": \"durable-☕\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 3.2636962909891736,
+    "requests": 2
+  },
+  {
+    "framework": "brainstone",
+    "case": "tool_use-1",
+    "passed": true,
+    "answer_correct": true,
+    "effect_contract": true,
+    "value": "durable-☕",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": false,
+        "event": "accepted",
+        "operation_id": 1
+      },
+      {
+        "event": "terminal",
+        "operation_id": 1,
+        "status": "completed",
+        "value": "{\"value\":\"durable-☕\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.1905736250046175,
+    "requests": 2
+  },
+  {
+    "framework": "agent-rs",
+    "case": "tool_unicode-1",
+    "passed": false,
+    "answer_correct": true,
+    "effect_contract": false,
+    "value": "mañana-東京",
+    "ledger": {
+      "effects": 0,
+      "attempts": 0
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "cdcd854f-5a7b-4144-8077-86eb5f9c33ab"
+      },
+      {
+        "event": "terminal",
+        "operation_id": "cdcd854f-5a7b-4144-8077-86eb5f9c33ab",
+        "status": "completed",
+        "value": "mañana-東京"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.4041089169913903,
+    "requests": 1
+  },
+  {
+    "framework": "langgraph",
+    "case": "tool_unicode-1",
+    "passed": true,
+    "answer_correct": true,
+    "effect_contract": true,
+    "value": "mañana-東京",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "tool_unicode-1",
+        "boundary": "input_checkpoint"
+      },
+      {
+        "event": "terminal",
+        "status": "completed",
+        "operation_id": "tool_unicode-1",
+        "value": "{\"value\": \"mañana-東京\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.343464416990173,
+    "requests": 2
+  },
+  {
+    "framework": "brainstone",
+    "case": "tool_unicode-1",
+    "passed": true,
+    "answer_correct": true,
+    "effect_contract": true,
+    "value": "mañana-東京",
+    "ledger": {
+      "effects": 1,
+      "attempts": 1
+    },
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": false,
+        "event": "accepted",
+        "operation_id": 1
+      },
+      {
+        "event": "terminal",
+        "operation_id": 1,
+        "status": "completed",
+        "value": "{\"value\":\"mañana-東京\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.531141083993134,
+    "requests": 2
+  },
+  {
+    "framework": "brainstone",
+    "case": "history-0",
+    "passed": true,
+    "first": {
+      "exit_code": 0,
+      "events": [
+        {
+          "duplicate": false,
+          "event": "accepted",
+          "operation_id": 1
+        },
+        {
+          "event": "terminal",
+          "operation_id": 1,
+          "status": "completed",
+          "value": "{\"value\": \"stored\"}"
+        }
+      ],
+      "stderr": "",
+      "seconds": 1.0278583329927642,
+      "requests": 2
+    },
+    "value": "cortex-☕",
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": false,
+        "event": "accepted",
+        "operation_id": 2
+      },
+      {
+        "event": "terminal",
+        "operation_id": 2,
+        "status": "completed",
+        "value": "{\"value\": \"cortex-☕\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.46567283300100826,
+    "requests": 1
+  },
+  {
+    "framework": "agent-rs",
+    "case": "history-0",
+    "passed": true,
+    "first": {
+      "exit_code": 0,
+      "events": [
+        {
+          "event": "accepted",
+          "operation_id": "8ca4779e-2dd8-418d-9cce-53abc87edc4f"
+        },
+        {
+          "event": "terminal",
+          "operation_id": "8ca4779e-2dd8-418d-9cce-53abc87edc4f",
+          "status": "completed",
+          "value": "stored"
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.5947840410080971,
+      "requests": 1
+    },
+    "value": "cortex-☕",
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "42c170f2-7841-49b8-86cf-7db10cb82259"
+      },
+      {
+        "event": "terminal",
+        "operation_id": "42c170f2-7841-49b8-86cf-7db10cb82259",
+        "status": "completed",
+        "value": "cortex-☕"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.5705209159932565,
+    "requests": 1
+  },
+  {
+    "framework": "langgraph",
+    "case": "history-0",
+    "passed": true,
+    "first": {
+      "exit_code": 0,
+      "events": [
+        {
+          "event": "accepted",
+          "operation_id": "history-0",
+          "boundary": "input_checkpoint"
+        },
+        {
+          "event": "terminal",
+          "status": "completed",
+          "operation_id": "history-0",
+          "value": "{\"value\": \"stored\"}"
+        }
+      ],
+      "stderr": "",
+      "seconds": 1.7195764999923995,
+      "requests": 2
+    },
+    "value": "cortex-☕",
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "history-0",
+        "boundary": "input_checkpoint"
+      },
+      {
+        "event": "terminal",
+        "status": "completed",
+        "operation_id": "history-0",
+        "value": "{\"value\": \"cortex-☕\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 4.685436042011133,
+    "requests": 1
+  },
+  {
+    "framework": "brainstone",
+    "case": "history-1",
+    "passed": true,
+    "first": {
+      "exit_code": 0,
+      "events": [
+        {
+          "duplicate": false,
+          "event": "accepted",
+          "operation_id": 1
+        },
+        {
+          "event": "terminal",
+          "operation_id": 1,
+          "status": "completed",
+          "value": "{\"value\": \"stored\"}"
+        }
+      ],
+      "stderr": "",
+      "seconds": 1.290678791992832,
+      "requests": 2
+    },
+    "value": "cortex-☕",
+    "exit_code": 0,
+    "events": [
+      {
+        "duplicate": false,
+        "event": "accepted",
+        "operation_id": 2
+      },
+      {
+        "event": "terminal",
+        "operation_id": 2,
+        "status": "completed",
+        "value": "{\"value\": \"cortex-☕\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.5395172080025077,
+    "requests": 1
+  },
+  {
+    "framework": "agent-rs",
+    "case": "history-1",
+    "passed": true,
+    "first": {
+      "exit_code": 0,
+      "events": [
+        {
+          "event": "accepted",
+          "operation_id": "d1b3002e-be7d-4b82-bc4e-96acf2c2830a"
+        },
+        {
+          "event": "terminal",
+          "operation_id": "d1b3002e-be7d-4b82-bc4e-96acf2c2830a",
+          "status": "completed",
+          "value": "stored"
+        }
+      ],
+      "stderr": "",
+      "seconds": 0.5930069999885745,
+      "requests": 1
+    },
+    "value": "cortex-☕",
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "d2e9b8a7-29ed-49ae-b993-f89a7247121f"
+      },
+      {
+        "event": "terminal",
+        "operation_id": "d2e9b8a7-29ed-49ae-b993-f89a7247121f",
+        "status": "completed",
+        "value": "cortex-☕"
+      }
+    ],
+    "stderr": "",
+    "seconds": 0.5886362500023097,
+    "requests": 1
+  },
+  {
+    "framework": "langgraph",
+    "case": "history-1",
+    "passed": true,
+    "first": {
+      "exit_code": 0,
+      "events": [
+        {
+          "event": "accepted",
+          "operation_id": "history-1",
+          "boundary": "input_checkpoint"
+        },
+        {
+          "event": "terminal",
+          "status": "completed",
+          "operation_id": "history-1",
+          "value": "{\"value\": \"stored\"}"
+        }
+      ],
+      "stderr": "",
+      "seconds": 1.491218833005405,
+      "requests": 2
+    },
+    "value": "cortex-☕",
+    "exit_code": 0,
+    "events": [
+      {
+        "event": "accepted",
+        "operation_id": "history-1",
+        "boundary": "input_checkpoint"
+      },
+      {
+        "event": "terminal",
+        "status": "completed",
+        "operation_id": "history-1",
+        "value": "{\"value\": \"cortex-☕\"}"
+      }
+    ],
+    "stderr": "",
+    "seconds": 1.008409166999627,
+    "requests": 1
+  }
+]

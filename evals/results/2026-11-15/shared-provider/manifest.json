@@ -1,0 +1,10 @@
+{
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "provider": "wafer/us",
+  "live": true,
+  "repetitions": 2,
+  "system": "Follow the user task. Use tools only when requested. Return a JSON object with exactly one key, \"value\", whose value is a string.",
+  "gateway": "buffered upstream JSON converted to SSE; no streaming benchmark",
+  "output_tokens": 768,
+  "budget_usd": "0.50"
+}

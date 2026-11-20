@@ -1,0 +1,24 @@
+[package]
+name = "brainstone-sigv4"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+repository.workspace = true
+readme = "README.md"
+keywords = ["aws", "sigv4", "signing"]
+categories = ["authentication", "cryptography"]
+description = "AWS SigV4 identity and request signing shared by both model adapters."
+
+[dependencies]
+aws-config = { workspace = true }
+aws-credential-types = { workspace = true }
+aws-sigv4 = { workspace = true }
+
+[dev-dependencies]
+aws-credential-types = { workspace = true, features = ["test-util"] }
+tokio = { workspace = true, features = ["macros", "rt"] }
+
+[lints]
+workspace = true

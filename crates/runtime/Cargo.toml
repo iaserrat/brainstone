@@ -1,0 +1,38 @@
+[package]
+name = "brainstone-runtime"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+repository.workspace = true
+readme = "README.md"
+keywords = ["durable", "sessions", "recovery", "sqlite", "postgres"]
+categories = ["database", "asynchronous"]
+description = "Durable operations over SQLite or PostgreSQL: sessions, lanes, leases, journal, recovery."
+
+[dependencies]
+agent = { path = "../agent", package = "brainstone-agent", version = "0.1.0" }
+# Names stored tool media by the reference a reply uses for it.
+media = { path = "../media", package = "brainstone-media", version = "0.1.0" }
+# Standing schedules need DST-correct local time in an IANA zone; the bundled
+# tzdb keeps the memory store and validation independent of the image's tzdata.
+jiff = { workspace = true, features = ["serde", "tzdb-bundle-always"] }
+serde = { workspace = true }
+serde_json = { workspace = true }
+# Bind approvals to exact invocations using the existing workspace digest crate.
+# Rejected: unstable std hashes or trusting model-controlled approval identifiers.
+sha2 = { workspace = true }
+uuid = { workspace = true }
+sqlx = { workspace = true }
+# Stream Unicode-filtered SQLite recall without buffering an entire scope.
+# Rejected: fetch_all, whose memory grows with the scope rather than the result limit.
+futures-util = { workspace = true }
+tokio = { workspace = true, features = ["macros", "rt", "time"] }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+tokio = { workspace = true, features = ["macros", "rt", "sync", "test-util", "time"] }
+
+[lints]
+workspace = true
