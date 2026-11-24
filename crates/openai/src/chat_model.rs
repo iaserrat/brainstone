@@ -10,6 +10,8 @@ pub struct ChatCompletionsModel {
     pub(crate) model: String,
     pub(crate) effort: Option<Effort>,
     pub(crate) max_tokens: Option<u32>,
+    /// Prompt capacity the caller declares for this target, in tokens.
+    pub(crate) context_window: Option<usize>,
 }
 
 impl ChatCompletionsModel {
@@ -37,7 +39,16 @@ impl ChatCompletionsModel {
             model,
             effort: None,
             max_tokens: None,
+            context_window: None,
         })
+    }
+
+    #[must_use]
+    /// Declares this target's prompt capacity in tokens. Without it the runtime
+    /// compacts on the configured budget alone and cannot tighten below it.
+    pub const fn with_context_window(mut self, tokens: usize) -> Self {
+        self.context_window = Some(tokens);
+        self
     }
 
     #[must_use]
@@ -56,6 +67,16 @@ impl ChatCompletionsModel {
 }
 
 impl Model for ChatCompletionsModel {
+    fn context_window(&self) -> Option<usize> {
+        self.context_window
+    }
+
+    /// What the router publishes for this model, so a caller can size its
+    /// budget before the first request.
+    async fn discover_context_window(&self) -> Option<usize> {
+        crate::model_catalog::discover(&self.http, &self.model).await
+    }
+
     async fn generate(&self, thread: &Thread, tools: &[Value]) -> ModelResponse {
         crate::chat_call::generate(self, thread, tools)
             .await

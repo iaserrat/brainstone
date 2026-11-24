@@ -60,6 +60,8 @@ mod chat_stream_merge;
 mod chat_stream_output;
 mod chat_stream_state;
 mod chat_tools;
+mod chat_usage;
+mod model_catalog;
 pub use chat_model::ChatCompletionsModel;
 
 /// Opaque Chat Completions continuation fields, stored without translation.

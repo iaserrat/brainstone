@@ -36,3 +36,7 @@ fn nested(mut definition: Value) -> Value {
         .remove("type");
     json!({"type":"function", "function":definition})
 }
+
+#[cfg(test)]
+#[path = "chat_request_stability_tests.rs"]
+mod stability_tests;

@@ -33,6 +33,14 @@ pub trait Model: Send + Sync {
         None
     }
 
+    /// Ask the target what prompt capacity it publishes, when it can be asked.
+    ///
+    /// A provider whose catalog is unreachable, silent, or does not name the
+    /// model returns `None`, and the caller keeps the budget it configured.
+    fn discover_context_window(&self) -> impl Future<Output = Option<usize>> + Send {
+        async { None }
+    }
+
     /// Runs one response to completion, reporting progress through `sink`.
     fn generate(
         &self,

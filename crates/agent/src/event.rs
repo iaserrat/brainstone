@@ -64,6 +64,21 @@ pub enum Event {
         /// The result, without the images only the appended message stores.
         result: ToolResult,
     },
+    /// Token accounting the provider reported for one response.
+    ///
+    /// Telemetry, never state: replay rebuilds the conversation from
+    /// [`Event::Appended`] and [`Event::Compacted`] alone, so a reader that
+    /// ignores this variant loses nothing. It is recorded like every other
+    /// event, and a reader that predates it rejects the record rather than
+    /// reading it as something else.
+    Usage {
+        /// Tokens the request's prompt occupied, cached or not.
+        prompt_tokens: u64,
+        /// Tokens the response produced.
+        completion_tokens: u64,
+        /// Prompt tokens the provider served from its own cache.
+        cached_tokens: u64,
+    },
     /// The run ended.
     RunFinished {
         /// How it ended.

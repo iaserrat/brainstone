@@ -9,15 +9,28 @@ mod size;
 
 const MAX_REPLAY_ATTACHMENT_BYTES: usize = 10 * 1024 * 1024;
 const MAX_REPLAY_ATTACHMENTS: usize = 96;
+/// Characters per token, used to put the size estimate and the declared prompt
+/// window in one unit. Deliberately low: over-counting tokens compacts early,
+/// while under-counting overruns the window and wastes a whole request.
+const CHARS_PER_TOKEN: usize = 3;
+/// Share of a declared window that may fill before compaction. The remainder
+/// absorbs estimation error and the response this run is about to ask for.
+const WINDOW_SHARE: usize = 9;
+const WINDOW_SCALE: usize = 10;
 
 /// When automatic compaction runs and what it keeps.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct CompactionPolicy {
+    /// Context size, in tokens, at which the thread is summarized.
     pub(crate) token_limit: usize,
     pub(crate) prompt: String,
 }
 
 impl CompactionPolicy {
+    /// `token_limit` is prompt capacity in tokens: system prompt, tools, and
+    /// messages together. A model that declares its own window can only tighten
+    /// this limit, never raise it.
+    ///
     /// # Errors
     /// Returns `invalid_input` for a zero limit or empty summarization prompt.
     pub fn new(token_limit: usize, prompt: &str) -> Result<Self, Error> {
@@ -66,11 +79,11 @@ impl CompactionPolicy {
                 size.map(|value| total.saturating_add(value))
             })?;
         let tools = serde_json::to_string(tools).map_err(Error::corrupt)?;
-        Ok(!within_replay_bound(thread)
-            || messages + size::estimate(&tools)
-                >= window.map_or(self.token_limit, |window| {
-                    self.token_limit.min(window.saturating_mul(9) / 10)
-                }))
+        let limit = window.map_or(self.token_limit, |window| {
+            self.token_limit
+                .min(window.saturating_mul(WINDOW_SHARE) / WINDOW_SCALE)
+        });
+        Ok(!within_replay_bound(thread) || tokens(messages + size::estimate(&tools)) >= limit)
     }
 
     /// The requests a summary is asked from, most faithful first; the next
@@ -84,6 +97,12 @@ impl CompactionPolicy {
             .into_iter()
             .map(|rung| request::build(thread, &rung, &self.prompt))
     }
+}
+
+/// The estimate is in characters; the limit and a declared window are in
+/// tokens.
+fn tokens(characters: usize) -> usize {
+    characters.div_ceil(CHARS_PER_TOKEN)
 }
 
 fn within_replay_bound(thread: &agent::Thread) -> bool {

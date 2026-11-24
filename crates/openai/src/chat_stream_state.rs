@@ -71,6 +71,9 @@ impl State {
     ) -> Result<(), Error<S::Error>> {
         let value = serde_json::from_str(data)
             .map_err(|error| Error::Provider(crate::sse::invalid(error.to_string())))?;
+        if let Some(usage) = crate::chat_usage::event(&value) {
+            sink.emit(usage).await.map_err(Error::Sink)?;
+        }
         let text = self.output.push(&value).map_err(Error::Provider)?;
         let reasoning = self.output.reasoning_delta(&value);
         self.progress

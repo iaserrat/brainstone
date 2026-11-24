@@ -28,6 +28,9 @@ async fn start<S: Sink + Send>(
     let mut request =
         crate::chat_request::request(model, thread, tools).map_err(Error::Provider)?;
     request["stream"] = Value::Bool(true);
+    // Ask routers to close the stream with a token-accounting chunk; without
+    // this a streamed response reports no usage at all.
+    request["stream_options"] = serde_json::json!({"include_usage": true});
     let response = crate::transport::execute(&model.http, &request, &model.parameters)
         .await
         .map_err(Error::Provider)?;
