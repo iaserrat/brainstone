@@ -33,4 +33,13 @@ impl ResponsesModel {
         self.http.idle_timeout(timeout)?;
         Ok(self)
     }
+
+    /// Hand every request to one HTTP proxy instead of the host's own route.
+    ///
+    /// # Errors
+    /// Reports an unusable proxy URL or HTTP client configuration failure.
+    pub fn with_egress(mut self, egress: &agent::Egress) -> Result<Self, ConfigError> {
+        self.http.set_egress(egress)?;
+        Ok(self)
+    }
 }

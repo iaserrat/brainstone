@@ -16,6 +16,11 @@ pub enum ConfigError {
         /// The TLS or runtime error.
         message: String,
     },
+    /// The proxy this client was told to use is not a usable proxy URL.
+    InvalidProxy {
+        /// The parser's message.
+        message: String,
+    },
     /// The model id is blank.
     EmptyModel,
     /// The bearer token is blank.
@@ -38,6 +43,7 @@ impl ConfigError {
         match self {
             Self::InvalidEndpoint { .. } => "invalid_endpoint",
             Self::ClientBuild { .. } => "client_build_failed",
+            Self::InvalidProxy { .. } => "invalid_proxy",
             Self::EmptyModel => "empty_model",
             Self::EmptyBearer => "empty_bearer",
             Self::EmptyRegion => "empty_region",
@@ -53,6 +59,10 @@ impl ConfigError {
         Self::ClientBuild {
             message: error.to_string(),
         }
+    }
+
+    pub(crate) fn proxy(message: String) -> Self {
+        Self::InvalidProxy { message }
     }
 
     pub(crate) fn environment(name: &'static str, error: &std::env::VarError) -> Self {
@@ -90,6 +100,7 @@ impl fmt::Display for ConfigError {
         match self {
             Self::InvalidEndpoint { message } => write!(formatter, "invalid endpoint: {message}"),
             Self::ClientBuild { message } => write!(formatter, "client build failed: {message}"),
+            Self::InvalidProxy { message } => write!(formatter, "invalid proxy: {message}"),
             Self::EmptyModel => formatter.write_str("model must not be empty"),
             Self::EmptyBearer => formatter.write_str("bearer token must not be empty"),
             Self::EmptyRegion => formatter.write_str("AWS region is empty"),

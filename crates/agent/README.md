@@ -33,6 +33,11 @@ A restored thread and a live thread in the same state produce the same step.
 
 ## The seams
 
+`Egress` is where a `Model` implementation should connect: `Egress::Direct` is
+the host's own route, and `Egress::proxy("http://127.0.0.1:8118")` is one HTTP
+proxy that then resolves the provider's name. Adapters that cannot honour an
+HTTP proxy refuse the setting instead of ignoring it.
+
 Four extension traits:
 
 | Trait | Responsibility |

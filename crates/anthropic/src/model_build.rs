@@ -1,5 +1,6 @@
 use std::time::Duration;
 
+use agent::Egress;
 use reqwest::Client;
 
 use crate::{AnthropicModel, Auth, ConfigError, Endpoint};
@@ -19,16 +20,8 @@ pub(crate) fn build(
     max_tokens: u32,
 ) -> Result<AnthropicModel, ConfigError> {
     validate(model, &auth, max_tokens)?;
-    let client = Client::builder()
-        .connect_timeout(CONNECT_TIMEOUT)
-        .read_timeout(IDLE_TIMEOUT)
-        .redirect(reqwest::redirect::Policy::none())
-        .build()
-        .map_err(|error| ConfigError::ClientBuild {
-            message: error.to_string(),
-        })?;
     Ok(AnthropicModel {
-        client,
+        client: client(&Egress::Direct)?,
         endpoint,
         model: model.to_owned(),
         auth,
@@ -36,6 +29,32 @@ pub(crate) fn build(
         effort: None,
         prompt_cache: false,
     })
+}
+
+/// The client the adapter sends with: one route, one timeout, no redirects.
+pub(crate) fn client(egress: &Egress) -> Result<Client, ConfigError> {
+    let builder = Client::builder()
+        .connect_timeout(CONNECT_TIMEOUT)
+        .read_timeout(IDLE_TIMEOUT)
+        .redirect(reqwest::redirect::Policy::none());
+    let builder = match egress.proxy_url() {
+        Some(url) => builder.proxy(proxy(url)?),
+        None => builder,
+    };
+    builder.build().map_err(|error| ConfigError::ClientBuild {
+        message: error.to_string(),
+    })
+}
+
+/// Only an HTTP proxy is usable: the client is built without SOCKS support, and
+/// reqwest refuses an unknown scheme on the first request instead of here.
+fn proxy(url: &str) -> Result<reqwest::Proxy, ConfigError> {
+    let invalid = |message: String| ConfigError::InvalidProxy { message };
+    let parsed = reqwest::Url::parse(url).map_err(|error| invalid(error.to_string()))?;
+    if !matches!(parsed.scheme(), "http" | "https") {
+        return Err(invalid(format!("{url} is not an http or https proxy URL")));
+    }
+    reqwest::Proxy::all(parsed).map_err(|error| invalid(error.to_string()))
 }
 
 fn validate(model: &str, auth: &Auth, max_tokens: u32) -> Result<(), ConfigError> {

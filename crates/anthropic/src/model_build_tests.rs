@@ -86,3 +86,17 @@ async fn serve(sent: usize, gap: Duration) -> String {
     });
     format!("http://{address}/v1/messages")
 }
+
+#[tokio::test]
+async fn only_an_http_proxy_is_accepted_before_the_first_request() {
+    use agent::Egress;
+
+    assert_eq!(
+        crate::model_build::client(&Egress::proxy("socks5://127.0.0.1:9050"))
+            .err()
+            .unwrap()
+            .code(),
+        "invalid_proxy"
+    );
+    assert!(crate::model_build::client(&Egress::proxy("http://127.0.0.1:8118")).is_ok());
+}

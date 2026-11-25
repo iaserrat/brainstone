@@ -46,6 +46,12 @@ The model is `Clone + Send + Sync`; clones share reqwest's connection pool.
 Its `Debug` output redacts credentials. `.with_max_output_tokens(n)` caps each
 response, reasoning included.
 
+`.with_egress(&agent::Egress::proxy("http://127.0.0.1:8118"))` hands every
+request to that HTTP proxy instead of the host's own route, and the proxy
+resolves the provider's name. The client is built without SOCKS support, so a
+`SOCKS` URL is refused with `invalid_proxy` before the first request rather
+than on it. The route survives `.with_idle_timeout`, which rebuilds the client.
+
 `Effort` supports `None`, `Minimal`, `Low`, `Medium`, `High`, `XHigh`, and
 `Max`. Model support varies. Without an effort setting, the adapter omits
 `reasoning` and uses the provider default. With effort set, requests also ask
@@ -53,9 +59,10 @@ for `include: ["reasoning.encrypted_content"]`. With `store: false`, the
 provider accepts only encrypted reasoning items on the next turn.
 
 Configuration errors also expose stable codes: `invalid_endpoint`,
-`empty_model`, `empty_bearer`, `empty_region`, `missing_environment`, and
-`client_build_failed`. A `SigV4` identity that cannot be resolved or signed at
-request time ends the turn with `authentication_failed`.
+`empty_model`, `empty_bearer`, `empty_region`, `invalid_proxy`,
+`missing_environment`, and `client_build_failed`. A `SigV4` identity that cannot
+be resolved or signed at request time ends the turn with
+`authentication_failed`.
 
 ## Wire contract
 

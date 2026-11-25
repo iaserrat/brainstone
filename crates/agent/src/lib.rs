@@ -12,6 +12,7 @@
 #![deny(missing_docs)]
 mod bytes64;
 mod call;
+mod egress;
 mod event;
 mod file;
 mod image;
@@ -44,6 +45,7 @@ mod turn_limit;
 mod user_images;
 
 pub use crate::call::{execute_tool, execute_tool_with_context, execute_tool_with_media, refused};
+pub use crate::egress::Egress;
 pub use crate::event::{Event, Sink};
 pub use crate::file::{File, FileError, MAX_FILE_NAME_BYTES};
 pub use crate::image::{Image, ImageError, ImageMediaType};

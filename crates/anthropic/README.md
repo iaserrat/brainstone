@@ -36,10 +36,15 @@ can continue while bytes arrive.
 Secrets never appear in `Debug` output.
 
 Configuration codes: `invalid_endpoint`, `empty_model`, `empty_api_key`,
-`empty_region`, `invalid_max_tokens`, `client_build_failed`. `SigV4` comes
-from the [sigv4](../sigv4/README.md) crate; `SigV4::load` fails with
+`empty_region`, `invalid_max_tokens`, `invalid_proxy`, `client_build_failed`.
+`SigV4` comes from the [sigv4](../sigv4/README.md) crate; `SigV4::load` fails with
 `empty_region` or `missing_credentials`. Credential resolution or signing failures at request
 time end the turn with `authentication_failed`.
+
+`.with_egress(&agent::Egress::proxy("http://127.0.0.1:8118"))` hands every
+request to that HTTP proxy instead of the host's own route, and the proxy
+resolves the name. The client is built without SOCKS support, so a `SOCKS` URL
+is refused with `invalid_proxy` before the first request rather than on it.
 
 Set reasoning effort with `.with_effort(anthropic::Effort::High)`. Supported
 values are `Low`, `Medium`, `High`, `XHigh`, and `Max`. If neither effort nor

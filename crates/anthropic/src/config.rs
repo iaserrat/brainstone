@@ -27,6 +27,11 @@ pub enum ConfigError {
         /// The TLS or runtime error.
         message: String,
     },
+    /// The proxy this client was told to use is not a usable proxy URL.
+    InvalidProxy {
+        /// The parser's message.
+        message: String,
+    },
 }
 
 impl ConfigError {
@@ -41,6 +46,7 @@ impl ConfigError {
             Self::InvalidMaxTokens => "invalid_max_tokens",
             Self::MissingEnvironment { .. } => "missing_environment",
             Self::ClientBuild { .. } => "client_build_failed",
+            Self::InvalidProxy { .. } => "invalid_proxy",
         }
     }
 }
@@ -51,6 +57,7 @@ impl fmt::Display for ConfigError {
             Self::InvalidEndpoint { message } | Self::ClientBuild { message } => {
                 formatter.write_str(message)
             }
+            Self::InvalidProxy { message } => write!(formatter, "invalid proxy: {message}"),
             Self::EmptyModel => formatter.write_str("model is empty"),
             Self::EmptyApiKey => formatter.write_str("API key is empty"),
             Self::EmptyRegion => formatter.write_str("AWS region is empty"),

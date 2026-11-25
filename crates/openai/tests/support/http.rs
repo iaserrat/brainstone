@@ -72,6 +72,8 @@ impl Sink for Events {
 pub(crate) struct Captured {
     pub body: Value,
     pub authorization: String,
+    /// The request line: absolute-form when a proxy received it.
+    pub line: String,
 }
 
 pub(crate) async fn serve_once(response: Value) -> (String, tokio::task::JoinHandle<Captured>) {
@@ -139,9 +141,11 @@ async fn read_request(stream: &mut tokio::net::TcpStream) -> Captured {
             let body = serde_json::from_slice(&bytes[start..start + length]).unwrap();
             let head = std::str::from_utf8(&bytes[..start]).unwrap();
             let authorization = header(head, "authorization").unwrap_or_default();
+            let line = head.lines().next().unwrap_or_default().to_owned();
             return Captured {
                 body,
                 authorization,
+                line,
             };
         }
     }

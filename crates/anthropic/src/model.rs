@@ -44,6 +44,15 @@ impl AnthropicModel {
         self.prompt_cache = true;
         self
     }
+
+    /// Hand every request to one HTTP proxy instead of the host's own route.
+    ///
+    /// # Errors
+    /// Reports an unusable proxy URL or HTTP client configuration failure.
+    pub fn with_egress(mut self, egress: &agent::Egress) -> Result<Self, ConfigError> {
+        self.client = crate::model_build::client(egress)?;
+        Ok(self)
+    }
 }
 
 impl Model for AnthropicModel {
